@@ -24,6 +24,9 @@ const btn_divide = document.querySelector("#btn_divide");
 const btn_decimal = document.querySelector("#btn_decimal");
 const btn_equal = document.querySelector("#btn_equal");
 
+const btn_ac = document.querySelector("#btn_ac");
+const btn_del = document.querySelector("#btn_del");
+
 // Let buttons add digits
 let btns = [btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9];
 for(let i=0;i<10;i++){
@@ -33,17 +36,28 @@ for(let i=0;i<10;i++){
 }
 
 function evaluate(){
+    let result = operand1;
     if(operator == "+"){
-        return operand1 + operand2;
+        result = operand1 + operand2;
     }else if(operator == "-"){
-        return operand1 - operand2;
+        result = operand1 - operand2;
     }else if(operator == "*"){
-        return operand1 * operand2;
+        result = operand1 * operand2;
     }else if(operator == "/"){
-        return operand1 / operand2;
-    }else{
-        return operand1;
+        result = operand1 / operand2;
     }
+    result = Math.round(result * 100000000) / 100000000;
+    return result;
+}
+
+// AC code
+btn_ac.onclick = () => {
+    curText.textContent = "";
+    prevText.textContent = "";
+    operand1 = null;
+    operand2 = null;
+    operator = "";
+    decimal_in_use = false;
 }
 
 //Plus Code
@@ -143,7 +157,8 @@ btn_decimal.onclick = () => {
 
 //Equal Code
 btn_equal.onclick = () => {
-    if(prevText.textContent != ""){
+    // If operand1 is null there is nothing to evaluate
+    if(prevText.textContent != "" && operand1!==null){
         // Set curText to default values if empty
         if(curText.textContent == ""){
             if(operator=="+" || operator=="-")
@@ -153,7 +168,12 @@ btn_equal.onclick = () => {
         }
 
         operand2 = parseFloat(curText.textContent);
+        
         operand1 = evaluate();
+        // Check if operand 1 has deciaml
+        if(operand1 % 1 != 0){
+            decimal_in_use = true;
+        }
 
         prevText.textContent += operand2.toString() + " = ";
         curText.textContent = operand1.toString();
@@ -161,6 +181,7 @@ btn_equal.onclick = () => {
         // Set the operand1 to null so that it restarts calculation from there
         operand1 = null;
         operator = "";
+        //console.log(decimal_in_use);
         
     }
 }
