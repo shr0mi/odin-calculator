@@ -47,7 +47,7 @@ function evaluate(){
         result = operand1 / operand2;
     }
 
-    // Avoiding Floating point error
+    // Avoiding Floating point error allows 7 place
     result = Math.round(result * 100000000) / 100000000;
     return result;
 }
