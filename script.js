@@ -201,6 +201,51 @@ btn_equal.onclick = () => {
 }
 
 
+// Keyboard support
+const body = document.querySelector("body");
+addEventListener("keydown", (e) => {
+    let key = e.key;
+    if(key == "0"){
+        btn0.click();
+    }else if(key == "1"){
+        btn1.click();
+    }else if(key == "2"){
+        btn2.click();
+    }else if(key == "3"){
+        btn3.click();
+    }else if(key == "4"){
+        btn4.click();
+    }else if(key == "5"){
+        btn5.click();
+    }else if(key == "6"){
+        btn6.click();
+    }else if(key == "7"){
+        btn7.click();
+    }else if(key == "8"){
+        btn8.click();
+    }else if(key == "9"){
+        btn9.click();
+    }else if(key == "+"){
+        btn_plus.click();
+    }else if(key == "-"){
+        btn_minus.click();
+    }else if(key == "*"){
+        btn_multiply.click();
+    }else if(key == "/"){
+        btn_divide.click();
+    }else if(key == "=" || key == "Enter"){
+        btn_equal.click();
+    }else if(key == "."){
+        btn_decimal.click();
+    }else if(key == "Backspace"){
+        btn_del.click();
+    }else if(key == "Escape"){
+        btn_ac.click();
+    }
+    console.log(key);
+})
+
+
 
 
 
