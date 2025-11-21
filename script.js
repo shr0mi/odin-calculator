@@ -76,6 +76,9 @@ btn_del.onclick = () => {
 
 //Plus Code
 btn_plus.onclick = () => {
+    // No prevText, noCurrentText should not register an operator
+    if(prevText.textContent == "" && curText.textContent == "")
+        return;
     // If empty add 0
     if(curText.textContent == "")
         curText.textContent = "0";
@@ -97,6 +100,9 @@ btn_plus.onclick = () => {
 
 //minus Code
 btn_minus.onclick = () => {
+    // No prevText, noCurrentText should not register an operator
+    if(prevText.textContent == "" && curText.textContent == "")
+        return;
     // If empty subtract 0
     if(curText.textContent == "")
         curText.textContent = "0";
@@ -118,6 +124,9 @@ btn_minus.onclick = () => {
 
 //multiply Code
 btn_multiply.onclick = () => {
+    // No prevText, noCurrentText should not register an operator
+    if(prevText.textContent == "" && curText.textContent == "")
+        return;
     // If empty subtract 0
     if(curText.textContent == "")
         curText.textContent = "1";
@@ -139,6 +148,9 @@ btn_multiply.onclick = () => {
 
 //divide Code
 btn_divide.onclick = () => {
+    // No prevText, noCurrentText should not register an operator
+    if(prevText.textContent == "" && curText.textContent == "")
+        return;
     // If empty subtract 0
     if(curText.textContent == "")
         curText.textContent = "1";
