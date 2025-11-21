@@ -46,6 +46,8 @@ function evaluate(){
     }else if(operator == "/"){
         result = operand1 / operand2;
     }
+
+    // Avoiding Floating point error
     result = Math.round(result * 100000000) / 100000000;
     return result;
 }
