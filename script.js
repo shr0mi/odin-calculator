@@ -1,6 +1,7 @@
 let operator = "";
 let operand1 = null;
 let operand2 = null;
+let decimal_in_use = false;
 
 const prevText = document.querySelector("#prevText");
 const curText = document.querySelector("#currentText");
@@ -18,6 +19,9 @@ const btn0 = document.querySelector("#btn0");
 
 const btn_plus = document.querySelector("#btn_plus");
 const btn_minus = document.querySelector("#btn_minus");
+const btn_multiply = document.querySelector("#btn_multiply");
+const btn_divide = document.querySelector("#btn_divide");
+const btn_decimal = document.querySelector("#btn_decimal");
 const btn_equal = document.querySelector("#btn_equal");
 
 // Let buttons add digits
@@ -33,6 +37,12 @@ function evaluate(){
         return operand1 + operand2;
     }else if(operator == "-"){
         return operand1 - operand2;
+    }else if(operator == "*"){
+        return operand1 * operand2;
+    }else if(operator == "/"){
+        return operand1 / operand2;
+    }else{
+        return operand1;
     }
 }
 
@@ -52,11 +62,14 @@ btn_plus.onclick = () => {
 
     prevText.textContent = operand1.toString() + " + ";
     curText.textContent = "";
+
+    // Allow decimal for next input
+    decimal_in_use = false;
 };
 
 //minus Code
 btn_minus.onclick = () => {
-    // If empty add 0
+    // If empty subtract 0
     if(curText.textContent == "")
         curText.textContent = "0";
 
@@ -70,9 +83,63 @@ btn_minus.onclick = () => {
 
     prevText.textContent = operand1.toString() + " - ";
     curText.textContent = "";
+
+    // Allow decimal for next input
+    decimal_in_use = false;
 };
 
+//multiply Code
+btn_multiply.onclick = () => {
+    // If empty subtract 0
+    if(curText.textContent == "")
+        curText.textContent = "1";
 
+    if(operand1 === null)
+        operand1 = parseFloat(curText.textContent);
+    else{
+        operand2 = parseFloat(curText.textContent);
+        operand1 = evaluate();
+    }
+    operator = "*";
+
+    prevText.textContent = operand1.toString() + " * ";
+    curText.textContent = "";
+
+    // Allow decimal for next input
+    decimal_in_use = false;
+};
+
+//divide Code
+btn_divide.onclick = () => {
+    // If empty subtract 0
+    if(curText.textContent == "")
+        curText.textContent = "1";
+
+    if(operand1 === null)
+        operand1 = parseFloat(curText.textContent);
+    else{
+        operand2 = parseFloat(curText.textContent);
+        operand1 = evaluate();
+    }
+    operator = "/";
+
+    prevText.textContent = operand1.toString() + " / ";
+    curText.textContent = "";
+
+    // Allow decimal for next input
+    decimal_in_use = false;
+};
+
+// Decimal code
+btn_decimal.onclick = () => {
+    if(!decimal_in_use){
+        if(curText.textContent == ""){
+            curText.textContent = "0";
+        }
+        curText.textContent += ".";
+        decimal_in_use = true;
+    }
+}
 
 //Equal Code
 btn_equal.onclick = () => {
@@ -81,6 +148,8 @@ btn_equal.onclick = () => {
         if(curText.textContent == ""){
             if(operator=="+" || operator=="-")
                 curText.textContent = "0";
+            if(operator=="*" || operator=="/")
+                curText.textContent = "1";
         }
 
         operand2 = parseFloat(curText.textContent);
@@ -89,6 +158,7 @@ btn_equal.onclick = () => {
         prevText.textContent += operand2.toString() + " = ";
         curText.textContent = operand1.toString();
 
+        // Set the operand1 to null so that it restarts calculation from there
         operand1 = null;
         operator = "";
         
