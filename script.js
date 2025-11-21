@@ -25,7 +25,7 @@ const btn_decimal = document.querySelector("#btn_decimal");
 const btn_equal = document.querySelector("#btn_equal");
 
 const btn_ac = document.querySelector("#btn_ac");
-const btn_del = document.querySelector("#btn_del");
+const btn_del = document.querySelector("#btn_backspace");
 
 // Let buttons add digits
 let btns = [btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9];
@@ -61,6 +61,18 @@ btn_ac.onclick = () => {
     operator = "";
     decimal_in_use = false;
 }
+
+// Del code
+btn_del.onclick = () => {
+    if(curText.textContent.length > 0){
+        // if you deleted decimal allow decimal
+        if(curText.textContent.at(-1) == ".")
+            decimal_in_use = false;
+
+        // remove last char
+        curText.textContent = curText.textContent.substring(0, curText.textContent.length-1);
+    }
+};
 
 //Plus Code
 btn_plus.onclick = () => {
