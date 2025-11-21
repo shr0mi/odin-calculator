@@ -1,5 +1,27 @@
 body {
     background-color: #2d2d30;
+    font-family: "Roboto Mono", monospace;
+    margin: 0px;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.app h2 {
+    color: white;
+}
+
+.app p {
+    margin-top: 20px;
+    color: white;
+}
+
+.app p a{
+    text-decoration: underline;
+    color: white;
 }
 
 .display {
